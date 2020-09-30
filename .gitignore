@@ -37,4 +37,4 @@ reports/
 !.gitignore
 !.gitkeep
 !.travis.yml
-src/edi
+!src/edi
