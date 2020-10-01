@@ -18,12 +18,14 @@ class IBestellung(model.Schema):
     """
     # If you want, you can load a xml model created TTW here
     # and customize it in Python:
-
+    
     vorname = schema.TextLine(title=_(u"Vorname"), required=True)
     nachname = schema.TextLine(title=_(u"Nachname"), required=True)
     artikelnummer = schema.Int(title=_(u"Artikelnummer"), required=True)
 
 @implementer(IBestellung)
 class Bestellung(Item):
-    """
-    """
+    def gen_json(self):
+        fields = zope.schema.getFieldsInOrder(IBestellung)
+        import pdb; pdb.set_trace()
+
