@@ -8,7 +8,7 @@
 
   <browser:page
     name="jsonview"
-    for="Products.CMFCore.interfaces.IFolderish"
+    for="*"
     class=".jsonview.Jsonview"
     permission="zope2.View"
     />

@@ -6,7 +6,7 @@ from plone.supermodel import model
 # from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.interface import implementer
-
+from plone.namedfile.field import NamedBlobFile
 
 from edi.jsonform import _
 
@@ -17,6 +17,7 @@ class IBestellung(model.Schema):
     # If you want, you can load a xml model created TTW here
     # and customize it in Python:
     
+    meinedateien = schema.List(title=u"Dateien", value_type = NamedBlobFile(title = u"Meine Datei"))
     vorname = schema.TextLine(title=_(u"Vorname"), required=True)
     nachname = schema.TextLine(title=_(u"Nachname"), required=True)
     artikelnummer = schema.Int(title=_(u"Artikelnummer"), required=True)
@@ -24,13 +25,13 @@ class IBestellung(model.Schema):
 
 @implementer(IBestellung)
 class Bestellung(Item):
-    schemadict={}
-    fields = schema.getFieldsInOrder(IBestellung)
-    for i in fields:
+    def gen_json(self):
+        schemadict={}
+        fields = schema.getFieldsInOrder(IBestellung)
         import pdb; pdb.set_trace()
-        schemadict[i[0]] = {}
+        for i in fields:
+            schemadict[i[0]] = {}
 
-    import pdb; pdb.set_trace()
     """
     def gen_json(self):
         fields = zope.schema.getFieldsInOrder(IBestellung)
